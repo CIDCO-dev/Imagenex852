@@ -1,2 +1,2 @@
 # Imagenex852
-Imagenex 852 toolkit
+Imagenex 852 sonar toolkit
