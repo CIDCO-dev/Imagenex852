@@ -67,7 +67,7 @@ class Imagenex852{
 								//read termination byte
 								if(in.read((char*)&terminationByte,1)){
 									if(terminationByte == 0xFC){
-										unsigned int paddingSize = ((hdr.nToReadIndex==0)?127:((hdr.nToReadIndex==2)?383:639)) - payloadBytes - sizeof(Imagenex852FileHeader) - sizeof(Imagenex852ReturnDataHeader)  ;
+										unsigned int paddingSize = ((hdr.nToReadIndex==0)?127:((hdr.nToReadIndex==2)?383:639)) - payloadBytes - sizeof(Imagenex852FileHeader) - sizeof(Imagenex852ReturnDataHeader);
 
 										if(!in.read((char*)&echoData,paddingSize)){
 											throw new Exception("Error while reading padding\n");
