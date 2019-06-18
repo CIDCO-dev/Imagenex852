@@ -27,7 +27,7 @@ public:
   *
   * @param msg Text value of the Exception message
   */
-  Exception(std::string & msg) : message(msg) {
+  Exception(std::string  msg) : message(msg) {
   }
 
   /**Returns the message in character line*/

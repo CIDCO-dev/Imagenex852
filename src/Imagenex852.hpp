@@ -130,23 +130,7 @@ class Imagenex852{
 			}
 		};
 
-		virtual void processPing(Imagenex852FileHeader &hdr,Imagenex852ReturnDataHeader & returnDataHdr,uint8_t * echoData,unsigned int payloadBytes){
-			std::stringstream ss;
-
-			ss << hdr.date << " " << hdr.time << hdr.timeHundredsSeconds << ".dat";
-
-			std::ofstream out(ss.str());
-
-			printf("Echo data:\n");
-			for(unsigned int i=0;i<payloadBytes;i++){
-				printf("%.2X ",(uint8_t)echoData[i]);
-				out << unsigned((uint8_t)echoData[i]) << std::endl;
-			}
-
-			printf("\n");
-
-			out.close();
-		}
+		virtual void processPing(Imagenex852FileHeader &hdr,Imagenex852ReturnDataHeader & returnDataHdr,uint8_t * echoData,unsigned int payloadBytes) = 0;
 };
 
 #endif
