@@ -1,9 +1,15 @@
 CC=g++
 FLAGS=-Wall -O3 -std=c++11
 
-default: prepare
-	$(CC) $(FLAGS) -o build/bin/read852 src/read852.cpp
-	
+default: dump852 octave-dumper
+	echo "Building all"
+
+dump852: prepare
+	$(CC) $(FLAGS) -o build/bin/dump852 src/dump852.cpp
+
+octave-dumper: prepare
+	$(CC) $(FLAGS) -o build/bin/octave-dumper src/octave-dumper.cpp
+
 clean:
 	rm -rf build
 
