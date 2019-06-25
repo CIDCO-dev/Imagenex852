@@ -8,7 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->pbCharge->setVisible(false);
+    ui->pbProgress->setVisible(false);
+    dt = new dump852Thread();
+    QObject::connect(dt,SIGNAL(AccessFileChanged(bool)),this,SLOT(onAccessFileChanged(bool)));
+    QObject::connect(dt,SIGNAL(ProgressVisibleChanged(bool)),this,SLOT(onProgressVisibleChanged(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -25,9 +28,18 @@ void MainWindow::on_actionCIDCO_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    ui->pbCharge->setVisible(true);
     QFileDialog fd;
-    dt.setOpenFile(fd.getOpenFileName().toStdString());
-    dt.setSaveFile(fd.getSaveFileName().toStdString());
-    dt.start();
+    dt->setOpenFile(fd.getOpenFileName().toStdString());
+    dt->setSaveFile(fd.getSaveFileName().toStdString());
+    dt->start();
+}
+
+void MainWindow::onAccessFileChanged(bool access)
+{
+    ui->menuFile->setEnabled(access);
+}
+
+void MainWindow::onProgressVisibleChanged(bool visible)
+{
+    ui->pbProgress->setVisible(visible);
 }

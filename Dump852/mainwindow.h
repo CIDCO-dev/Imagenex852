@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include "dump852thread.h"
+#include <QtCore>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void onAccessFileChanged(bool);
+    void onProgressVisibleChanged(bool);
+
 private slots:
     void on_actionCIDCO_triggered();
 
@@ -24,7 +29,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-        ::dump852Thread dt;
+        dump852Thread *dt;
 };
 
 #endif // MAINWINDOW_H

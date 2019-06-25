@@ -1,10 +1,13 @@
 #ifndef DUMPER852_HPP
 #define DUMPER852_HPP
 #include <iostream>
-#include "../src/Imagenex852.hpp"
+#include "Imagenex852.hpp"
+#include <QProgressDialog>
+#include <QObject>
 class Dumper852 : public Imagenex852{
 
     std::ofstream out;
+    QProgressDialog pd;
 
 public:
     Dumper852(std::string filename){
@@ -22,12 +25,8 @@ public:
                         out << hdr.timeHundredsSeconds << " ";
                         out << unsigned((uint8_t)hdr.mode) << " ";
                         out << unsigned((uint8_t)hdr.startGain) << " ";
-                        out << unsigned((uint8_t)hdr.sectorSize) << " ";
-                        out << unsigned((uint8_t)hdr.trainAngle) << " ";
                         out << unsigned((uint8_t)hdr.pulseLength) << " ";
-                        out << unsigned((uint8_t)hdr.profile) << " ";
                         out << unsigned((uint16_t)hdr.soundSpeed) << " ";
-                        out << hdr.userText << " ";
                         out << unsigned((uint8_t)hdr.operatingFrequency) << " ";
                         out << unsigned((uint8_t)hdr.headId) << " ";
 
