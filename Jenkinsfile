@@ -28,7 +28,6 @@ pipeline {
       post {
         always {
           publishCppcheck pattern:'build/coverage/reports/cppcheck.xml'
-          step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'build/coverage/reports/gcovr-report.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
           junit 'build/test/reports/*.xml'
           sh 'mkdir -p $publishCoberturaDir'
           sh 'cp -r build/coverage/reports/*.html $publishCoberturaDir/'
