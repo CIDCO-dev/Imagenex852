@@ -1,7 +1,12 @@
 #ifndef IMAGENEX852_HPP
 #define IMAGENEX852_HPP
 
+#ifdef _WIN32
+#include "winsock2.h"
+#else
 #include <arpa/inet.h>
+#endif
+
 #include <string>
 #include <sstream>
 #include <fstream>

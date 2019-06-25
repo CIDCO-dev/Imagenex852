@@ -28,9 +28,9 @@ pipeline {
       post {
         always {
           publishCppcheck pattern:'build/coverage/reports/cppcheck.xml'
-          junit 'build/test/reports/*.xml'
-          sh 'mkdir -p $publishCoberturaDir'
-          sh 'cp -r build/coverage/reports/*.html $publishCoberturaDir/'
+          //junit 'build/test/reports/*.xml'
+          //sh 'mkdir -p $publishCoberturaDir'
+          //sh 'cp -r build/coverage/reports/*.html $publishCoberturaDir/'
         }
       }
     }
@@ -57,9 +57,12 @@ pipeline {
         bat "Scripts\\change_makefile_name.bat"
         //compile
         bat "make"
+        bat "call Scripts\\build_gui.bat"
         bat "call Scripts\\sign_exes.au3"
+        bat "call Scripts\\package_gui.bat"
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
+        archiveArtifacts('build\\bin\\Dump852-GUI.zip')
       }
     }
 
@@ -79,6 +82,7 @@ pipeline {
         sh 'mkdir -p $binWinx64PublishDir'
         sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/dump852.exe $binWinx64PublishDir/dump852-$version.exe'
         sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/octave-dumper.exe $binWinx64PublishDir/octave-dumper-$version.exe'
+        sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/Dump852-GUI.zip $binWinx64PublishDir/Dump852-GUI-$version.zip'
       }
     }
   }
