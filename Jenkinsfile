@@ -30,7 +30,7 @@ pipeline {
           publishCppcheck pattern:'build/coverage/reports/cppcheck.xml'
           //junit 'build/test/reports/*.xml'
           //sh 'mkdir -p $publishCoberturaDir'
-          sh 'cp -r build/coverage/reports/*.html $publishCoberturaDir/'
+          //sh 'cp -r build/coverage/reports/*.html $publishCoberturaDir/'
         }
       }
     }
