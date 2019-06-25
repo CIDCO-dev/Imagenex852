@@ -57,6 +57,7 @@ pipeline {
         bat "Scripts\\change_makefile_name.bat"
         //compile
         bat "make"
+        bat "call Scripts\\build_gui.bat"
         bat "call Scripts\\sign_exes.au3"
         bat "call Scripts\\package_gui.bat"
         archiveArtifacts('build\\bin\\dump852.exe')
