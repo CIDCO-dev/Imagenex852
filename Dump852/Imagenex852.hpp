@@ -5,10 +5,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <QProgressDialog>
 #include "../src/util/Exception.hpp"
-#include <QWidget>
-#include <QObject>
 
 /**
  * File data is in bigendian
@@ -61,7 +58,6 @@ class Imagenex852{
 
     public:
         void read(std::string & filename){
-            QProgressDialog pDialog("readDump852...","Cancel",0,100);
             std::ifstream in(filename,std::ios::binary);
             printf("Header size: %ld\n",sizeof(Imagenex852FileHeader));
 
@@ -97,7 +93,6 @@ class Imagenex852{
 
                                         //Process received data
                                         processPing(hdr,returnDataHdr,echoData,payloadBytes);
-                                        pDialog.setValue(pDialog.value()+incr);
 
                                         //Read zero-padded filler
                                         unsigned int paddingSize = ((hdr.nToReadIndex==0)?127:((hdr.nToReadIndex==2)?383:639)) - payloadBytes - sizeof(Imagenex852FileHeader) - sizeof(Imagenex852ReturnDataHeader);

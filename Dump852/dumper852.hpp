@@ -2,12 +2,9 @@
 #define DUMPER852_HPP
 #include <iostream>
 #include "Imagenex852.hpp"
-#include <QProgressDialog>
-#include <QObject>
 class Dumper852 : public Imagenex852{
 
     std::ofstream out;
-    QProgressDialog pd;
 
 public:
     Dumper852(std::string filename){
