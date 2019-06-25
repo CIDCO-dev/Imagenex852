@@ -10,10 +10,15 @@ dump852: prepare
 octave-dumper: prepare
 	$(CC) $(FLAGS) -o build/bin/octave-dumper src/octave-dumper.cpp
 
+coverage:
+	mkdir -p build/coverage || true
+	mkdir -p build/coverage/reports || true
+	mkdir -p build/coverage/bin || true
+	cppcheck --xml --xml-version=2 --enable=all --inconclusive --language=c++ src 2> build/coverage/reports/cppcheck.xml
+
 clean:
 	rm -rf build
 
 prepare: clean
 	mkdir -p build || true
 	mkdir -p build/bin || true
-

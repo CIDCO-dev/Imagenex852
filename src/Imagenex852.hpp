@@ -6,14 +6,19 @@
 #ifndef IMAGENEX852_HPP
 #define IMAGENEX852_HPP
 
+#ifdef _WIN32
+#include "winsock2.h"
+#else
 #include <arpa/inet.h>
+#endif
+
 #include <string>
 #include <sstream>
 #include <fstream>
 #include "util/Exception.hpp"
 
 /**
- * File data is in bigendian 
+ * File data is in bigendian
  */
 
 #pragma pack(1)
@@ -42,7 +47,7 @@ typedef struct{
 	uint16_t	rovHeading;
 	uint16_t	rovTurnsCounter;
 	uint8_t		operatingFrequency;
-	uint8_t		headId; 
+	uint8_t		headId;
 	char		reserved5[11]; //TODO: decortiquer selon la spec
 } Imagenex852FileHeader;
 #pragma pack()
