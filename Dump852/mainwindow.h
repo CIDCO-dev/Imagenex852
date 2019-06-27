@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QThread>
-#include "dump852thread.h"
+#include "workerThread.h"
 #include <QtCore>
 
 namespace Ui {
@@ -18,6 +18,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void disableUI();
+    void enableUI();
+
 public slots:
     void onAccessFileChanged(bool);
     void onProgressVisibleChanged(bool);
@@ -27,9 +30,14 @@ private slots:
 
     void on_actionOpen_triggered();
 
+    void on_btnDump_clicked();
+
 private:
     Ui::MainWindow *ui;
-        dump852Thread *dt;
+    WorkerThread worker;
+
+    std::string inputFileName;
+    std::string outputFileName;
 };
 
 #endif // MAINWINDOW_H

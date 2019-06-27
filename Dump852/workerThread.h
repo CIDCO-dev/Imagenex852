@@ -6,24 +6,32 @@
 #include "Imagenex852.hpp"
 #include "dumper852.hpp"
 
-class dump852Thread:public QThread
+class WorkerThread:public QThread
 {
     Q_OBJECT
 
 public:
-    dump852Thread();
+    WorkerThread();
     void run();
-    void setOpenFile(std::string filename);
-    void setSaveFile(std::string filename);
+
     Dumper852 *dump;
+
+
+    void setInputFileName(std::string & filename){
+        inputFileName = filename;
+    }
+
+    void setOutputFileName(std::string & filename){
+        outputFileName = filename;
+    }
 
 signals:
     void AccessFileChanged(bool);
     void ProgressVisibleChanged(bool);
 
 private:
-    std::string openFile;
-    std::string saveFile;
+    std::string inputFileName;
+    std::string outputFileName;
 };
 
 #endif // DUMP852THREAD_H
