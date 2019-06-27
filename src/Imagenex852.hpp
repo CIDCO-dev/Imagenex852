@@ -110,8 +110,8 @@ class Imagenex852{
 										}
 									}
 									else{
-										printf("Termination byte: %.2X\n",terminationByte);
-										throw new Exception("Bad termination byte found at the end of packet");
+										//printf("Termination byte: %.2X\n",terminationByte);
+										//throw new Exception("Bad termination byte found at the end of packet");
 									}
 								}
 								else{
