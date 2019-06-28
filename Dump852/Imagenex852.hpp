@@ -54,7 +54,7 @@ typedef struct{
         uint8_t         serialStatus;
     uint16_t	reserved1;
     uint8_t		range;
-    uint16_t	profileRange;
+    uint8_t	    profileRange[2];
     uint16_t	dataBytes;
 } Imagenex852ReturnDataHeader;
 #pragma pack()
@@ -77,7 +77,7 @@ class Imagenex852{
                         hdr.magic[1]=='5' &&
                         hdr.magic[2]=='2'
                     ){
-                        printf("Got file header\n");
+                        //printf("Got file header\n");
 
                         Imagenex852ReturnDataHeader returnDataHdr;
 
@@ -85,12 +85,12 @@ class Imagenex852{
                             unsigned int payloadBytes = (hdr.nToReadIndex==0)?0:((hdr.nToReadIndex==2)?252:500);
                             uint8_t	     echoData[501];
 
-                            printf("Got return data header\n");
+                            //printf("Got return data header\n");
 
                             if(in.read((char*)&echoData,payloadBytes)){
                                 uint8_t terminationByte;
 
-                                printf("Got payload (%d bytes)\n",payloadBytes);
+                                //printf("Got payload (%d bytes)\n",payloadBytes);
 
                                 //read termination byte
                                 if(in.read((char*)&terminationByte,1)){
@@ -107,8 +107,10 @@ class Imagenex852{
                                         }
                                     }
                                     else{
-                                        printf("Termination byte: %.2X\n",terminationByte);
-                                        throw new Exception("Bad termination byte found at the end of packet");
+                                        //Some 852 files have a wrong padding
+                                        break;
+                                        //printf("Termination byte: %.2X\n",terminationByte);
+                                        //throw new Exception("Bad termination byte found at the end of packet");
                                     }
                                 }
                                 else{
