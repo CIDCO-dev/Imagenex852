@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QThread>
-#include "workerThread.h"
 #include <QtCore>
 
 namespace Ui {
@@ -34,10 +32,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    WorkerThread worker;
 
     std::string inputFileName;
     std::string outputFileName;
+
+    int fileSize;
 };
 
 #endif // MAINWINDOW_H

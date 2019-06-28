@@ -24,13 +24,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    WorkerThread.cpp
+        mainwindow.cpp
 
 HEADERS  += mainwindow.h \
     dumper852.hpp \
-    Imagenex852.hpp \
-    workerThread.h
+    Imagenex852.hpp
 
 FORMS    += mainwindow.ui
 
