@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
-    <DisplayName>Dump852 (cli)</DisplayName>
+    <DisplayName>Imagenex-Dump852 (CLI)</DisplayName>
     <Description>Install Dump852 CLI (Command Line)</Description>
     <Version>VERSION-NUMBER</Version>
     <ReleaseDate>DATE</ReleaseDate>

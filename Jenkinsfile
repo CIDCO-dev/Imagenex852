@@ -28,28 +28,9 @@ pipeline {
       post {
         always {
           publishCppcheck pattern:'build/coverage/reports/cppcheck.xml'
-          //junit 'build/test/reports/*.xml'
-          //sh 'mkdir -p $publishCoberturaDir'
-          //sh 'cp -r build/coverage/reports/*.html $publishCoberturaDir/'
         }
       }
     }
-
-    //NO TEST YET
-    /*stage('BUILD WINDOWS AND TEST'){
-      agent {label 'windows10-x64-2'}
-      steps {
-        bat "Scripts\\change_makefile_name.bat"
-        //compile
-        bat "make"
-        bat "make test"
-      }
-      post {
-        always {
-          junit 'build\\test\\reports\\*.xml'
-        }
-      }
-    }*/
 
     stage('BUILD AND SIGN EXES'){
       agent {label 'windows10-x64-2'}
@@ -60,6 +41,9 @@ pipeline {
         bat "call Scripts\\build_gui.bat"
         bat "call Scripts\\sign_exes.au3"
         bat "call Scripts\\package_gui.bat"
+        bat "call Scripts\\build_and_package_for_installer.bat"
+        bat 'Scripts\\set_date_and_version.bat'
+
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
         archiveArtifacts('build\\bin\\Dump852-GUI.zip')
@@ -73,6 +57,12 @@ pipeline {
         sh 'mkdir -p $binMasterPublishDir'
         sh 'cp -r build/bin/dump852 $binMasterPublishDir/dump852-$version'
         sh 'cp -r build/bin/octave-dumper $binMasterPublishDir/octave-dumper-$version'
+        sh 'Scripts/build_and_package_for_installer.sh'
+        sh 'Scripts/set_date_and_version.sh'
+        sh 'cd Installer'
+        sh '/opt/Qt/QtIFW-3.1.1/bin/binarycreator -c config/config.xml -p packages Imagenex852-Dump-$version-Installer.run'
+        sh 'cd ..'
+        sh 'cp -r Installer/Imagenex852-Dump-$version-Installer.run $binMasterPublishDir/Imagenex852-Dump-$version-Installer.run'
       }
     }
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version=$1
-date=$(date +"%m-%d-%Y")
+date=$(date +"%Y-%m-%d")
 
 if [ $# -eq 0 ]
   then
