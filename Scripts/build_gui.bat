@@ -2,7 +2,7 @@
 
 ::NOTE - cl.exe must be in Environment PATH (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64)
 
-cd Dump852
+cd src\examples\Dump852
 
 ::Locate c++ files for compilation
 call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
@@ -13,4 +13,4 @@ rmdir /s /q release
 mkdir release
 move Dump852.exe release
 call "C:\Qt\5.12.2\msvc2017_64\bin\windeployqt.exe" release\Dump852.exe
-cd ..
+cd ..\..\..\
