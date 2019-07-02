@@ -1,7 +1,7 @@
 
 $CMD1='"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool" sign /debug /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a build\bin\dump852.exe'
 $CMD2='"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool" sign /debug /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a build\bin\octave-dumper.exe'
-$CMD3='"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool" sign /debug /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a Dump852\release\Dump852.exe'
+$CMD3='"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool" sign /debug /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a src\examples\Dump852\release\Dump852.exe'
 
 Run("cmd.exe")
 Sleep(2000)
