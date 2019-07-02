@@ -3,6 +3,8 @@
 make
 
 mkdir -p build/gui || true
+mkdir -p Installer/packages/ca.cidco.dump852-gui/data
+mkdir -p Installer/packages/ca.cidco.imagenex852-cli/data
 
 cd src/examples/Dump852
 
