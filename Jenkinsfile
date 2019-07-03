@@ -43,11 +43,11 @@ pipeline {
         bat "call Scripts\\package_gui.bat"
         //Make installer
         bat "call Scripts\\build_and_package_for_installer.bat"
-        bat 'Scripts\\set_date_and_version.bat'
-        bat 'cd Installer'
-        bat '%binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe'
-        bat 'cd ..'
-        
+        bat "call Scripts\\set_date_and_version.bat %version% %NEED A DATE%"
+        bat "cd Installer"
+        bat "%binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe"
+        bat "cd .."
+
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
         archiveArtifacts('build\\bin\\Dump852-GUI.zip')
