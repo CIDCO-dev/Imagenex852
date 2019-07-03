@@ -1,7 +1,12 @@
 @echo off
 
 set version=%1
+set releaseDate=%2
 
-call powershell.exe -Command "get-content Installer\config\config.xml | %{$_ -replace 'VERSION-NUMBER', '%version%'}" > Installer\config\config2.xml && move /Y Installer\config\config2.xml Installer\config\config.xml
-call powershell.exe -Command "get-content Installer\config\config.xml | %{$_ -replace 'DATE', '%version%'}" > Installer\config\config2.xml && move /Y Installer\config\config2.xml Installer\config\config.xml
-call powershell.exe -Command "get-content Installer\config\config.xml | %{$_ -replace 'VERSION-NUMBER', '%version%'}" > Installer\packages\*\meta\package2.xml && move /Y Installer\packages\*\meta\package2.xml Installer\packages\*\meta\package.xml
+call powershell.exe -Command "(Get-Content Installer\config\config.xml) | Foreach-Object {$_ -replace 'VERSION-NUMBER', '%version%'} | Set-Content Installer\config\config.xml" || echo "Something went wrong when setting version"
+
+call powershell.exe -Command "(Get-Content Installer\packages\ca.cidco.dump852-gui\meta\package.xml) | Foreach-Object {$_ -replace 'DATE<', '%releaseDate%<'} | Set-Content Installer\packages\ca.cidco.dump852-gui\meta\package.xml"
+call powershell.exe -Command "(Get-Content Installer\packages\ca.cidco.imagenex852-cli\meta\package.xml) | Foreach-Object {$_ -replace 'DATE<', '%releaseDate%<'} | Set-Content Installer\packages\ca.cidco.imagenex852-cli\meta\package.xml"
+
+call powershell.exe -Command "(Get-Content Installer\packages\ca.cidco.dump852-gui\meta\package.xml) | Foreach-Object {$_ -replace 'VERSION-NUMBER', '%version%'} | Set-Content Installer\packages\ca.cidco.dump852-gui\meta\package.xml"
+call powershell.exe -Command "(Get-Content Installer\packages\ca.cidco.imagenex852-cli\meta\package.xml) | Foreach-Object {$_ -replace 'VERSION-NUMBER', '%version%'} | Set-Content Installer\packages\ca.cidco.imagenex852-cli\meta\package.xml"

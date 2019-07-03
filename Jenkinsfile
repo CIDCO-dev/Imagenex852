@@ -41,12 +41,17 @@ pipeline {
         bat "call Scripts\\build_gui.bat"
         bat "call Scripts\\sign_exes.au3"
         bat "call Scripts\\package_gui.bat"
+        //Make installer
         bat "call Scripts\\build_and_package_for_installer.bat"
         bat 'Scripts\\set_date_and_version.bat'
-
+        bat 'cd Installer'
+        bat '%binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe'
+        bat 'cd ..'
+        
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
         archiveArtifacts('build\\bin\\Dump852-GUI.zip')
+        archiveArtifacts('Installer\\Imagenex852-Dump-Installer-$version-windows.exe')
       }
     }
 
@@ -60,7 +65,7 @@ pipeline {
         sh 'Scripts/build_and_package_for_installer.sh'
         sh 'Scripts/set_date_and_version.sh'
         sh 'cd Installer'
-        sh '/opt/Qt/QtIFW-3.1.1/bin/binarycreator -c config/config.xml -p packages Imagenex852-Dump-$version-Installer.run'
+        sh '/opt/Qt/QtIFW-3.1.1/bin/binarycreator -c config/config.xml -p packages Imagenex852-Dump-Installer-$version.run'
         sh 'cd ..'
         sh 'cp -r Installer/Imagenex852-Dump-$version-Installer.run $binMasterPublishDir/Imagenex852-Dump-$version-Installer.run'
       }
