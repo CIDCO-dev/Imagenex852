@@ -54,7 +54,7 @@ pipeline {
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
         archiveArtifacts('build\\gui\\Dump852-GUI.zip')
-        archiveArtifacts('Installer\\Imagenex852-Dump-Installer-%version%-windows.exe')
+        archiveArtifacts('Installer\\*.exe')
       }
     }
 
