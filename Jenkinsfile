@@ -66,7 +66,7 @@ pipeline {
         sh 'cp -r build/bin/dump852 $binMasterPublishDir/dump852-$version'
         sh 'cp -r build/bin/octave-dumper $binMasterPublishDir/octave-dumper-$version'
         sh 'Scripts/build_and_package_for_installer.sh'
-        sh 'Scripts/set_date_and_version.sh'
+        sh 'Scripts/set_date_and_version.sh $version'
         sh 'cd Installer && /opt/Qt/QtIFW-3.1.1/bin/binarycreator -c config/config.xml -p packages Imagenex852-Dump-Installer-$version.run'
         sh 'cp -r Installer/Imagenex852-Dump-$version-Installer.run $binMasterPublishDir/Imagenex852-Dump-$version-Installer.run'
       }
