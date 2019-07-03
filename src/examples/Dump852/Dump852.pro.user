@@ -233,6 +233,7 @@
       <value type="bool" key="Qt4ProjectManager.MakeStep.Clean">true</value>
       <value type="QString" key="Qt4ProjectManager.MakeStep.MakeArguments">clean</value>
       <value type="QString" key="Qt4ProjectManager.MakeStep.MakeCommand"></value>
+
      </valuemap>
      <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">1</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Clean</value>
@@ -264,6 +265,7 @@
    <value type="int" key="ProjectExplorer.Target.DeployConfigurationCount">1</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.PluginSettings"/>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.0">
+
     <value type="bool" key="Analyzer.QmlProfiler.AggregateTraces">false</value>
     <value type="bool" key="Analyzer.QmlProfiler.FlushEnabled">false</value>
     <value type="uint" key="Analyzer.QmlProfiler.FlushInterval">1000</value>
@@ -278,6 +280,7 @@
     <value type="double" key="Analyzer.Valgrind.Callgrind.MinimumCostRatio">0.01</value>
     <value type="double" key="Analyzer.Valgrind.Callgrind.VisualisationMinimumCostRatio">10</value>
     <value type="bool" key="Analyzer.Valgrind.FilterExternalIssues">true</value>
+
     <value type="int" key="Analyzer.Valgrind.LeakCheckOnFinish">1</value>
     <value type="int" key="Analyzer.Valgrind.NumCallers">25</value>
     <valuelist type="QVariantList" key="Analyzer.Valgrind.RemovedSuppressionFiles"/>
@@ -306,6 +309,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Dump852</value>
+
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/glm/src/Imagenex852/Dump852/Dump852.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
@@ -319,6 +323,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
@@ -334,5 +339,6 @@
  <data>
   <variable>Version</variable>
   <value type="int">18</value>
+
  </data>
 </qtcreator>

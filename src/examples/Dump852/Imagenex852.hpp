@@ -10,7 +10,8 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include "../src/util/Exception.hpp"
+#include "../../util/Exception.hpp"
+
 
 /**
  * File data is in bigendian
