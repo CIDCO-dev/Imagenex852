@@ -115,16 +115,19 @@ class Imagenex852{
 									}
 								}
 								else{
-									throw new Exception("No termination byte found at the end of packet");
+									std::cerr << "No termination byte found at the end of packet" << std::endl;
+									break;
 								}
 							}
 						}
 						else{
-							throw new Exception("No return data header");
+							std::cerr << "No return data header" << std::endl;
+							break;
 						}
 					}
 					else{
-						throw new Exception("Invalid 852 file header");
+						std::cerr << "Invalid 852 file header" << std::endl;
+						break;
 					}
 				}
 

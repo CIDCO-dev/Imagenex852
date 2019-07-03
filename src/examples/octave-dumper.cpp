@@ -1,11 +1,15 @@
 #include <iostream>
-#include "Imagenex852.hpp"
+#include "../Imagenex852.hpp"
 
 void printUsage(){
 	std::cerr << "Usage: octave-dump filename.852" << std::endl;
 	exit(1);
 }
 
+/**
+ * For each ping, dumps ping's echo timeseries into a file in order to examine them in octave
+ * Warning: creates LOTS of files
+ */
 class OctaveDumper : public Imagenex852{
 		void processPing(Imagenex852FileHeader &hdr,Imagenex852ReturnDataHeader & returnDataHdr,uint8_t * echoData,unsigned int payloadBytes){
 			std::stringstream ss;
