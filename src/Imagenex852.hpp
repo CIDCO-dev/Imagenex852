@@ -40,7 +40,7 @@ typedef struct{
 	uint8_t		reserved4;  //Always 9
 	uint8_t		pulseLength; //in microSeconds
 	uint8_t		profile; //0=off,1=points only,2=low mix,3=medium mix,4=high mix
-	uint16_t	soundSpeed;
+	uint8_t		soundSpeed[2];
 	char		userText[32];
 	uint16_t	rovDepth;
 	uint8_t		depthUnits;
@@ -59,7 +59,7 @@ typedef struct{
         uint8_t         serialStatus;
 	uint16_t	reserved1;
 	uint8_t		range;
-	uint16_t	profileRange;
+	uint8_t		profileRange[2];
 	uint16_t	dataBytes;
 } Imagenex852ReturnDataHeader;
 #pragma pack()
@@ -68,7 +68,7 @@ class Imagenex852{
 	public:
 		void read(std::string & filename){
 			std::ifstream in(filename,std::ios::binary);
-			printf("Header size: %ld\n",sizeof(Imagenex852FileHeader));
+			//printf("Header size: %ld\n",sizeof(Imagenex852FileHeader));
 
 			if(in){
 				Imagenex852FileHeader hdr;
@@ -80,20 +80,21 @@ class Imagenex852{
 						hdr.magic[1]=='5' &&
 						hdr.magic[2]=='2'
 					){
-						printf("Got file header\n");
+						//printf("Got file header\n");
 
 						Imagenex852ReturnDataHeader returnDataHdr;
 
 						if(in.read((char*)&returnDataHdr,sizeof(Imagenex852ReturnDataHeader))){
 							unsigned int payloadBytes = (hdr.nToReadIndex==0)?0:((hdr.nToReadIndex==2)?252:500);
+							unsigned int fillSize     = (hdr.nToReadIndex==0)?15:((hdr.nToReadIndex==2)?19:27);
 							uint8_t	     echoData[501];
 
-							printf("Got return data header\n");
+							//printf("Got return data header\n");
 
 							if(in.read((char*)&echoData,payloadBytes)){
 								uint8_t terminationByte;
 
-								printf("Got payload (%d bytes)\n",payloadBytes);
+								//printf("Got payload (%d bytes)\n",payloadBytes);
 
 								//read termination byte
 								if(in.read((char*)&terminationByte,1)){
@@ -102,10 +103,7 @@ class Imagenex852{
 										//Process received data
 										processPing(hdr,returnDataHdr,echoData,payloadBytes);
 
-										//Read zero-padded filler
-										unsigned int paddingSize = ((hdr.nToReadIndex==0)?127:((hdr.nToReadIndex==2)?383:639)) - payloadBytes - sizeof(Imagenex852FileHeader) - sizeof(Imagenex852ReturnDataHeader);
-
-										if(!in.read((char*)&echoData,paddingSize)){
+										if(!in.read((char*)&echoData,fillSize)){
 											throw new Exception("Error while reading padding\n");
 										}
 									}

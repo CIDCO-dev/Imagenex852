@@ -17,16 +17,18 @@ public:
     }
 
     void processPing(Imagenex852FileHeader &hdr,Imagenex852ReturnDataHeader & returnDataHdr,uint8_t * echoData,unsigned int payloadBytes){
-            uint8_t profileRangeHi = (returnDataHdr.profileRange[1] & 0x7E) >> 1;
-            uint8_t profileRangeLo = ((returnDataHdr.profileRange[1] & 0x01) << 7)|(returnDataHdr.profileRange[0] & 0x7F);
+            uint8_t  profileRangeHi = (returnDataHdr.profileRange[1] & 0x7E) >> 1;
+            uint8_t  profileRangeLo = ((returnDataHdr.profileRange[1] & 0x01) << 7)|(returnDataHdr.profileRange[0] & 0x7F);
             uint16_t profileRange  = (profileRangeHi << 8) | (profileRangeLo);
+
+	    double soundSpeed = ( hdr.soundSpeed[0] & 0x80 )? 1500.0 : (double) ((((uint16_t)(hdr.soundSpeed[0] & 0x7F)) << 8) | hdr.soundSpeed[1]) / (double) 10.0 ;
 
                         out << hdr.date << " "
                             << hdr.time << hdr.timeHundredsSeconds << " "
                             << unsigned((uint8_t)hdr.mode) << " "
                             << unsigned((uint8_t)hdr.startGain) << " "
                             << unsigned((uint8_t)hdr.pulseLength) << " "
-                            << unsigned((uint16_t)hdr.soundSpeed) << " "
+                            << soundSpeed << " "
                             << unsigned((uint8_t)hdr.operatingFrequency) << " "
                             << unsigned((uint8_t)hdr.headId) << " "
                             << unsigned((uint8_t)returnDataHdr.range) << " "
