@@ -22,6 +22,10 @@ pipeline {
     stage('TEST MASTER'){
       agent { label 'master'}
       steps {
+        //Initialize date variable for windows
+        script{
+          date= sh([ script: 'date +"%Y-%m-%d"', returnStdout: true]).trim()
+        }
         sh "make"
         sh "make coverage"
       }
@@ -43,7 +47,7 @@ pipeline {
         bat "call Scripts\\package_gui.bat"
         //Make installer
         bat "call Scripts\\build_and_package_for_installer.bat"
-        bat "call Scripts\\set_date_and_version.bat %version% %NEED A DATE%"
+        bat "call Scripts\\set_date_and_version.bat %version% ${date}"
         bat "cd Installer"
         bat "%binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe"
         bat "cd .."
