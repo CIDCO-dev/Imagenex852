@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Imagenex852.hpp"
+#include "../Imagenex852.hpp"
 
 void printUsage(){
 	std::cerr << "Usage: dump852 filename.852 outputFilename" << std::endl;

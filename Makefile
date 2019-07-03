@@ -5,10 +5,13 @@ default: dump852 octave-dumper
 	echo "Building all"
 
 dump852: prepare
-	$(CC) $(FLAGS) -o build/bin/dump852 src/dump852.cpp
+	$(CC) $(FLAGS) -o build/bin/dump852 src/examples/dump852.cpp
 
 octave-dumper: prepare
-	$(CC) $(FLAGS) -o build/bin/octave-dumper src/octave-dumper.cpp
+	$(CC) $(FLAGS) -o build/bin/octave-dumper src/examples/octave-dumper.cpp
+
+imager:
+	$(CC) $(FLAGS) $(pkg-config --cflags opencv) src/examples/imager.cpp `pkg-config --libs opencv` -o build/bin/imager
 
 coverage:
 	mkdir -p build/coverage || true
