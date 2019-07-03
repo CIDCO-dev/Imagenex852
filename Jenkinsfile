@@ -68,6 +68,7 @@ pipeline {
         sh 'Scripts/build_and_package_for_installer.sh'
         sh 'Scripts/set_date_and_version.sh $version'
         sh 'cd Installer && /opt/Qt/QtIFW-3.1.1/bin/binarycreator -c config/config.xml -p packages Imagenex852-Dump-Installer-$version.run'
+        sh 'chmod +x Installer/Imagenex852-Dump-Installer-$version.run'
         sh 'cp -r Installer/Imagenex852-Dump-Installer-$version.run $binMasterPublishDir/Imagenex852-Dump-Installer-$version.run'
       }
     }
