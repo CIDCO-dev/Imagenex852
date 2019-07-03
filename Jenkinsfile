@@ -47,6 +47,7 @@ pipeline {
         bat "cd Installer"
         bat "%binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe"
         bat "cd .."
+        bat "call Script\\sign_installer.au3 %version%"
 
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
