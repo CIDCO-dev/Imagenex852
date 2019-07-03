@@ -3,8 +3,8 @@
 make
 
 mkdir -p build/gui || true
-mkdir -p Installer/packages/ca.cidco.dump852-gui/data
-mkdir -p Installer/packages/ca.cidco.imagenex852-cli/data
+mkdir -p Installer/packages/ca.cidco.dump852_gui/data
+mkdir -p Installer/packages/ca.cidco.imagenex852_cli/data
 
 cd src/examples/Dump852
 
@@ -18,7 +18,7 @@ cp Dump852 ../../../build/gui
 cd ../../../
 
 cd build/gui
-7z a ../../Installer/packages/ca.cidco.dump852-gui/data/dump852_linux.zip *
+7z a ../../Installer/packages/ca.cidco.dump852_gui/data/dump852_linux.zip *
 cd ..
-7z a ../Installer/packages/ca.cidco.imagenex852-cli/data/imagenex853-CLI.zip bin/*
+7z a ../Installer/packages/ca.cidco.imagenex852_cli/data/imagenex853-CLI.zip bin/*
 cd ../
