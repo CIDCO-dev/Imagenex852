@@ -6,6 +6,7 @@ pipeline {
     patch="${env.BUILD_ID}"
     name="${env.JOB_NAME}"
     version="$major.$minor.$patch"
+    date=sh(returnStdout: true, script: 'date +"%Y-%m-%d"').trim()
 
     publishDir="/var/www/html/$name/$version"
     lastPublishDir="/var/www/html/$name/last"
