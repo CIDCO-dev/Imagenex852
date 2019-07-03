@@ -48,9 +48,7 @@ pipeline {
         //Make installer
         bat "call Scripts\\build_and_package_for_installer.bat"
         bat "call Scripts\\set_date_and_version.bat %version% ${date}"
-        bat "cd Installer"
-        bat "%binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe"
-        bat "cd .."
+        bat "cd Installer & %binarycreator% -c config\\config.xml -p packages Imagenex852-Dump-Installer-$version-windows.exe"
         bat "call Script\\sign_installer.au3 %version%"
 
         archiveArtifacts('build\\bin\\dump852.exe')
