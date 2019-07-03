@@ -53,7 +53,7 @@ pipeline {
 
         archiveArtifacts('build\\bin\\dump852.exe')
         archiveArtifacts('build\\bin\\octave-dumper.exe')
-        archiveArtifacts('build\\bin\\Dump852-GUI.zip')
+        archiveArtifacts('build\\gui\\Dump852-GUI.zip')
         archiveArtifacts('Installer\\Imagenex852-Dump-Installer-$version-windows.exe')
       }
     }
@@ -80,7 +80,8 @@ pipeline {
         sh 'mkdir -p $binWinx64PublishDir'
         sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/dump852.exe $binWinx64PublishDir/dump852-$version.exe'
         sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/octave-dumper.exe $binWinx64PublishDir/octave-dumper-$version.exe'
-        sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/Dump852-GUI.zip $binWinx64PublishDir/Dump852-GUI-$version.zip'
+        sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/gui/Dump852-GUI.zip $binWinx64PublishDir/Dump852-GUI-$version.zip'
+        sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/Installer/Imagenex852-Dump-Installer-$version-windows.exe $binWinx64PublishDir/Imagenex852-Dump-Installer-$version-windows.exe'
       }
     }
   }
