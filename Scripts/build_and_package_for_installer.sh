@@ -18,7 +18,7 @@ cp Dump852 ../../../build/gui
 cd ../../../
 
 cd build/gui
-7z a ../../Installer/packages/ca.cidco.dump852_gui/data/dump852_linux.zip *
+7z a ../../Installer/packages/ca.cidco.dump852_gui/data/dump852_linux.7z *
 cd ..
-7z a ../Installer/packages/ca.cidco.imagenex852_cli/data/imagenex853-CLI.zip bin/*
+7z a ../Installer/packages/ca.cidco.imagenex852_cli/data/imagenex853-CLI.7z bin/*
 cd ../
