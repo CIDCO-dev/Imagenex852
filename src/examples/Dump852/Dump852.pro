@@ -27,8 +27,8 @@ SOURCES += main.cpp\
         mainwindow.cpp
 
 HEADERS  += mainwindow.h \
-    dumper852.hpp \
-    Imagenex852.hpp
+    ../dumper852.hpp \
+    ../../Imagenex852.hpp
 
 FORMS    += mainwindow.ui
 
