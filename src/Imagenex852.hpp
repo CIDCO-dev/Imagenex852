@@ -15,6 +15,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 #include "util/Exception.hpp"
 
 /**
