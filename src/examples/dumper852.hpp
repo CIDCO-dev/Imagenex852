@@ -1,7 +1,8 @@
 #ifndef DUMPER852_HPP
 #define DUMPER852_HPP
-#include <iostream>
-#include "Imagenex852.hpp"
+
+#include "../Imagenex852.hpp"
+
 class Dumper852 : public Imagenex852{
 
     std::ofstream out;
@@ -21,7 +22,7 @@ public:
             uint8_t  profileRangeLo = ((returnDataHdr.profileRange[1] & 0x01) << 7)|(returnDataHdr.profileRange[0] & 0x7F);
             uint16_t profileRange  = (profileRangeHi << 8) | (profileRangeLo);
 
-	    double soundSpeed = ( hdr.soundSpeed[0] & 0x80 )? 1500.0 : (double) ((((uint16_t)(hdr.soundSpeed[0] & 0x7F)) << 8) | hdr.soundSpeed[1]) / (double) 10.0 ;
+            double soundSpeed = ( hdr.soundSpeed[0] & 0x80 )? 1500.0 : (double) ((((uint16_t)(hdr.soundSpeed[0] & 0x7F)) << 8) | hdr.soundSpeed[1]) / (double) 10.0 ;
 
                         out << hdr.date << " "
                             << hdr.time << hdr.timeHundredsSeconds << " "
@@ -42,4 +43,5 @@ public:
             out << std::endl;
         }
 };
-#endif // DUMPER852_HPP
+
+#endif

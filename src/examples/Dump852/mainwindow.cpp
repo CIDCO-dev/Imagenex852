@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QFileDialog>
-#include "dumper852.hpp"
+#include "../dumper852.hpp"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
