@@ -25,3 +25,4 @@ clean:
 prepare: clean
 	mkdir -p build || true
 	mkdir -p build/bin || true
+	mkdir -p build/bin/Dump852 || true

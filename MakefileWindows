@@ -5,10 +5,10 @@ default: dump852 octave-dumper
 	echo "Building all"
 
 dump852: prepare
-	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\dump852.cpp /EHsc /Fedump852.exe
+	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\examples\\dump852.cpp /EHsc /Fedump852.exe
 
 octave-dumper: prepare
-	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\octave-dumper.cpp /EHsc /Feoctave-dumper.exe
+	call "%windows10_x64_BUILD_TOOLS_ROOT%\\VC\\Auxiliary\\Build\\vcvarsall.bat" x64 && cd build\\bin &&cl ..\\..\\src\\examples\\octave-dumper.cpp /EHsc /Feoctave-dumper.exe
 
 clean:
 	if exist "build" rmdir /q /s build
