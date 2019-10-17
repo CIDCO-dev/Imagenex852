@@ -12,6 +12,7 @@
 #include <arpa/inet.h>
 #endif
 
+#include <cstring>
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -64,6 +65,8 @@ typedef struct{
 	uint16_t	dataBytes;
 } Imagenex852ReturnDataHeader;
 #pragma pack()
+
+const std::string ImagenexMonths[] { "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
 class Imagenex852{
 	public:
@@ -137,7 +140,18 @@ class Imagenex852{
 			}
 		};
 
+		int getMonth(char * month){
+			for(unsigned int i=0;i<12;i++){
+				if(strcmp(ImagenexMonths[i].c_str(),month)==0){
+					return i;
+				}
+			}
+
+			return -1;
+		}
+
 		virtual void processPing(Imagenex852FileHeader &hdr,Imagenex852ReturnDataHeader & returnDataHdr,uint8_t * echoData,unsigned int payloadBytes) = 0;
+
 };
 
 #endif
