@@ -20,7 +20,7 @@ pipeline {
   stages {
 
     stage('TEST MASTER'){
-      agent { label 'ubn-20-build-depthstar-vm'}
+      agent { label 'ubnt20-build-opensidescan-vm'}
       steps {
         //Initialize date variable for windows
         script{
@@ -59,7 +59,7 @@ pipeline {
     }
 
     stage('BUILD MASTER'){
-      agent { label 'ubn-20-build-depthstar-vm'}
+      agent { label 'ubnt20-build-opensidescan-vm'}
       steps {
         sh "make"
         sh 'mkdir -p $binMasterPublishDir'
@@ -74,7 +74,7 @@ pipeline {
     }
 
     stage('SAVE WINDOWS EXE on SERVER'){
-      agent { label 'ubn-20-build-depthstar-vm' }
+      agent { label 'ubnt20-build-opensidescan-vm' }
       steps {
         sh 'mkdir -p $binWinx64PublishDir'
         sh 'cp /var/lib/jenkins/jobs/$name/builds/$patch/archive/build/bin/dump852.exe $binWinx64PublishDir/dump852-$version.exe'
