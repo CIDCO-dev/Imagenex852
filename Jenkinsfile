@@ -37,7 +37,7 @@ pipeline {
     }
 
     stage('BUILD AND SIGN EXES'){
-      agent {label 'windows10-x64-2'}
+      agent {label 'windows10-build-opensidescan-vm'}
       steps {
         bat "Scripts\\change_makefile_name.bat"
         //compile
