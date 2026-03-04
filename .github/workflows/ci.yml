@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MAJOR: "0"
+  MINOR: "1"
+
+jobs:
+  linux-test:
+    name: Linux build + cppcheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential make cppcheck
+
+      - name: Compute version
+        run: |
+          echo "PATCH=${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          echo "VERSION=${MAJOR}.${MINOR}.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+
+      - name: Build CLI tools
+        run: make
+
+      - name: Run cppcheck report (legacy coverage target)
+        run: make coverage
+
+      - name: Upload Linux CLI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-cli-${{ env.VERSION }}
+          path: |
+            build/bin/dump852
+            build/bin/octave-dumper
+          if-no-files-found: error
+
+      - name: Upload cppcheck report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cppcheck-report-${{ env.VERSION }}
+          path: build/coverage/reports/cppcheck.xml
+          if-no-files-found: warn
+
+  windows-cli-build:
+    name: Windows CLI build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSYS2 toolchain
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            make
+
+      - name: Compute version
+        shell: msys2 {0}
+        run: |
+          echo "PATCH=${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          echo "VERSION=${MAJOR}.${MINOR}.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+
+      - name: Build CLI tools (Windows)
+        shell: msys2 {0}
+        run: make
+
+      - name: Upload Windows CLI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-cli-${{ env.VERSION }}
+          path: |
+            build/bin/dump852*
+            build/bin/octave-dumper*
+          if-no-files-found: error
+
+  ci-summary:
+    name: CI summary
+    runs-on: ubuntu-latest
+    needs:
+      - linux-test
+      - windows-cli-build
+    if: ${{ always() }}
+
+    steps:
+      - name: Publish summary
+        run: |
+          {
+            echo "## Imagenex852 CI"
+            echo
+            echo "- Version CI: ${MAJOR}.${MINOR}.${GITHUB_RUN_NUMBER}"
+            echo "- Linux build/cppcheck: ${{ needs['linux-test'].result }}"
+            echo "- Windows CLI build: ${{ needs['windows-cli-build'].result }}"
+            echo
+            echo "Les étapes Jenkins de packaging/signature (Qt IFW, AutoIt, certificats) restent à migrer séparément."
+          } >> "$GITHUB_STEP_SUMMARY"
